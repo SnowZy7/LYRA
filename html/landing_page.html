@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LYRA - Plateforme musicale</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0F172A;
+            color: #FFFFFF;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background blobs */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            background: #3C157F;
+            filter: blur(100px);
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        body::before {
+            width: 500px;
+            height: 500px;
+            top: -100px;
+            right: -150px;
+        }
+
+        body::after {
+            width: 600px;
+            height: 600px;
+            bottom: -200px;
+            left: -200px;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Logo */
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin: 60px 0 40px;
+            letter-spacing: 2px;
+        }
+
+        .logo .y-letter {
+            background: linear-gradient(135deg, #2CB1BC 0%, #8A38F5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Hero section */
+        .hero-text {
+            text-align: center;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Buttons */
+        .btn-custom {
+            padding: 15px 40px;
+            border-radius: 26px;
+            font-weight: 500;
+            font-size: 1rem;
+            border: none;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-inscription {
+            background: transparent;
+            border: 2px solid #8A38F5;
+            color: #FFFFFF;
+        }
+
+        .btn-inscription:hover {
+            background: #8A38F5;
+            transform: translateY(-2px);
+        }
+
+        .btn-connexion {
+            background: #8A38F5;
+            color: #FFFFFF;
+        }
+
+        .btn-connexion:hover {
+            background: #9d4fff;
+            transform: translateY(-2px);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 80px;
+        }
+
+        /* Section titles */
+        .section-title {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: #2CB1BC;
+        }
+
+        /* Description */
+        .platform-description {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .platform-description .title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #2CB1BC;
+            font-weight: 700;
+        }
+
+        .platform-description .title .lyra-italic {
+            font-style: italic;
+        }
+
+        .platform-description p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Feature cards */
+        .feature-card {
+            background: rgba(15, 23, 42, 0.5);
+            border: 2px solid rgba(138, 56, 245, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 50px;
+            box-shadow: 0 0 10px rgba(138, 56, 245, 0.4);
+        }
+
+        .feature-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .feature-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-card ul li {
+            font-size: 0.9rem;
+            font-weight: 400;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .feature-card ul li::before {
+            content: '•';
+            color: #2CB1BC;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .tagline {
+            text-align: center;
+            font-size: 0.95rem;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+
+        /* Two column cards */
+        .two-column-section {
+            margin-bottom: 80px;
+        }
+
+        .two-column-section .feature-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Final CTA section */
+        .final-cta {
+            text-align: center;
+            margin: 80px 0;
+        }
+
+        .final-cta h2 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+            color: #2CB1BC;
+        }
+
+        .final-cta .subtitle {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .final-cta .description {
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        footer a {
+            color: #2CB1BC;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+                margin: 40px 0 30px;
+            }
+
+            .hero-text {
+                font-size: 0.9rem;
+                padding: 0 20px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                padding: 0 20px;
+            }
+
+            .btn-custom {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+                padding: 0 20px;
+            }
+
+            .feature-card {
+                padding: 25px;
+                margin-bottom: 20px;
+            }
+
+            .feature-card h3 {
+                font-size: 1rem;
+            }
+
+            .feature-card ul li {
+                font-size: 0.85rem;
+            }
+
+            body::before {
+                width: 300px;
+                height: 300px;
+                top: -50px;
+                right: -100px;
+            }
+
+            body::after {
+                width: 400px;
+                height: 400px;
+                bottom: -150px;
+                left: -150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo">
+            L<span class="y-letter">Y</span>RA
+        </div>
+
+        <!-- Hero Text -->
+        <div class="hero-text">
+            Ici, tu ne crées jamais seul : partage tes questions, découvre des solutions et fais évoluer ta musique avec l'aide d'une communauté passionnée.
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="cta-buttons">
+            <a href="#" class="btn-custom btn-inscription">Inscription</a>
+            <a href="#" class="btn-custom btn-connexion">Connexion</a>
+        </div>
+
+        <!-- Platform Description -->
+        <div class="platform-description">
+            <div class="title">
+                <span class="lyra-italic">LYRA</span> est une plateforme d'entraide dédiée aux musiciens.
+            </div>
+            <p>
+                Chaque utilisateur peut poser une question, demander un avis, partager une difficulté ou montrer son travail, et recevoir des réponses de personnes qui partagent la même passion.
+            </p>
+        </div>
+
+        <!-- Community Section -->
+        <h2 class="section-title">Une communauté qui se répond</h2>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="feature-card">
+                    <ul>
+                        <li>Pose ta question en quelques secondes</li>
+                        <li>Ajoute des tags pour qu'elle touche les bonnes personnes</li>
+                        <li>Reçois des retours constructifs de musiciens débutants à confirmés</li>
+                        <li>Identifie la réponse qui t'a aidé avec le tag « Solution »</li>
+                        <li>Ton post devient alors « Résolu » et aide les autres à leur tour</li>
+                    </ul>
+                    <div class="tagline">Sur LYRA, chacun apporte sa pierre à l'édifice</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gamification Section -->
+        <h2 class="section-title">Nous valorisons l'entraide</h2>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="feature-card">
+                    <h3>Système de badges & progression</h3>
+                    <ul>
+                        <li>Donnes des réponses utiles</li>
+                        <li>Fais monter ton niveau de contribution</li>
+                        <li>Débloque des badges</li>
+                        <li>Gagne en visibilité sur la plateforme</li>
+                    </ul>
+                </div>
+                <div class="tagline">Plus tu aides, plus la communauté te reconnaît</div>
+            </div>
+        </div>
+
+        <!-- Content Section -->
+        <h2 class="section-title">Publie ce que tu veux, comme tu veux</h2>
+        
+        <div class="row justify-content-center two-column-section">
+            <div class="col-lg-5 col-md-6 mb-5">
+                <div class="feature-card">
+                    <h3>Chaque post peut contenir:</h3>
+                    <ul>
+                        <li>du texte</li>
+                        <li>des images</li>
+                        <li>des extraits audio</li>
+                        <li>des vidéos</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-6 mb-5">
+                <div class="feature-card">
+                    <h3>Mais tu peux aussi:</h3>
+                    <ul>
+                        <li>sauvegarder des posts pour les regarder plus tard</li>
+                        <li>mettre en avant les réponses les plus pertinentes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personalized Feed Section -->
+        <h2 class="section-title">Un fil d'actualité personnalisé</h2>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="feature-card">
+                    <h3>Grâce aux tags ajoutés lors de l'inscription</h3>
+                    <ul>
+                        <li>Ton feed s'adapte à ce que TOI, tu veux apprendre</li>
+                        <li>Tes publications sont montrées aux personnes les plus susceptibles d'y répondre</li>
+                        <li>Tu restes dans un environnement visuellement clair et cohérent</li>
+                    </ul>
+                    <div class="tagline">Un espace pensé pour la créativité, sans bruit inutile</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why Join Section -->
+        <h2 class="section-title">Pourquoi rejoindre LYRA ?</h2>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="feature-card">
+                    <p style="text-align: center; margin: 0;">
+                        Parce que progresser seul, c'est difficile<br>
+                        Parce qu'un regard extérieur peut tout changer<br>
+                        Parce que tu mérites un espace où l'on t'écoute, t'aide et te conseille
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final CTA -->
+        <div class="final-cta">
+            <div class="subtitle">Sur LYRA, ta musique évolue grâce aux autres</div>
+            <div class="subtitle">Et tu aides évolue grâce à toi</div>
+            <h2>Alors qu'attends-tu ?</h2>
+            <a href="#" class="btn-custom btn-inscription">Inscription</a>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <a href="#">Conditions générales</a>
+            <a href="#">LYRA</a>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

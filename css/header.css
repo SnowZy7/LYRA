@@ -1,0 +1,260 @@
+/* Header fixe en haut */
+.header-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: #0D0B1E;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Navbar */
+.navbar {
+    padding: 0.5rem 1rem;
+    background-color: #0D0B1E;
+}
+
+.navbar .container-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 2rem;
+}
+
+/* Logo */
+.logo-img {
+    height: 40px;
+    width: auto;
+}
+
+/* Barre de recherche */
+.search-container {
+    position: relative;
+    flex: 1;
+    max-width: 584px;
+    margin: 0 2rem;
+}
+
+.search-input {
+    width: 100%;
+    height: 35px;
+    border-radius: 10px;
+    border: none;
+    padding: 0.5rem 3rem 0.5rem 1rem;
+    background-color: white;
+    color: black;
+}
+
+.search-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(44, 177, 188, 0.5);
+}
+
+.search-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+/* Container du profil et menu */
+.profile-menu-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 0;
+}
+
+/* Bouton profil */
+.profile-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+    z-index: 1001;
+}
+
+.profile-img {
+    width: 49px;
+    height: 49px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid black;
+    transition: transform 0.3s ease;
+}
+
+.profile-btn:hover .profile-img {
+    transform: scale(1.05);
+}
+
+/* Menu déroulant */
+.menu-dropdown {
+    position: fixed;
+    top: auto;
+    right: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    z-index: 1000;
+    min-width: 280px;
+    width: max-content;
+}
+
+/* Ajustement pour que le menu soit collé complètement à droite */
+.profile-menu-container {
+    margin-right: 0;
+}
+
+.menu-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.menu-wrapper {
+    background-color: #0D0B1E;
+    border-radius: 0 0 10px 10px; /* Pas de border-radius en haut, 10px en bas */
+    padding: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Menu ouvert : border-radius de 10px partout sauf en haut à droite et en haut à gauche */
+.menu-dropdown.active .menu-wrapper {
+    border-radius: 0 0 10px 10px; /* 0px en haut gauche et haut droite, 10px en bas */
+}
+
+/* Menu fermé : border-radius de 15px en bas à gauche */
+.menu-dropdown:not(.active) .menu-wrapper {
+    border-radius: 0 0 15px 0; /* 15px seulement en bas à gauche */
+}
+
+.menu-items {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1.5rem;
+    gap: 0.75rem;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.menu-item img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.menu-item span {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+
+.menu-item-deco {
+    color: #2CB1BC;
+}
+
+.menu-item-deco span {
+    color: #2CB1BC;
+}
+
+/* Responsive - Tablette et mobile (max-width: 768px) */
+@media (max-width: 768px) {
+    .navbar .container-fluid {
+        padding: 0.5rem 1rem;
+    }
+
+    .logo-img {
+        height: 30px;
+    }
+
+    .search-container {
+        display: none !important;
+    }
+
+    .profile-img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .menu-dropdown {
+        min-width: 250px;
+        right: -1rem; /* Collé à droite sur mobile */
+    }
+
+    .menu-items {
+        padding: 1.25rem 0.75rem;
+        gap: 0.5rem;
+    }
+
+    .menu-item {
+        padding: 0.5rem 0.75rem;
+        font-size: 17px;
+    }
+
+    .menu-item img {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+/* Responsive - Mobile très petit (max-width: 480px) */
+@media (max-width: 480px) {
+    .navbar .container-fluid {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .logo-img {
+        height: 25px;
+    }
+
+    .profile-img {
+        width: 35px;
+        height: 35px;
+    }
+
+    .menu-dropdown {
+        min-width: 200px;
+        right: -0.75rem; /* Collé à droite sur très petit mobile */
+    }
+
+    .menu-items {
+        padding: 1rem 0.75rem;
+        gap: 0.5rem;
+    }
+
+    .menu-item {
+        padding: 0.5rem;
+        font-size: 17px;
+    }
+
+    .menu-item img {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+/* Animation pour le scroll */
+.header-fixed.scrolled {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
