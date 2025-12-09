@@ -4,8 +4,9 @@
     box-sizing: border-box;
 }
 
-:root {
-    
+/* Fluid root font-size so rem-based measurements scale with viewport */
+html {
+    font-size: clamp(14px, 0.9vw + 12px, 18px);
 }
 
 body {
@@ -15,6 +16,9 @@ body {
 }
 
 .container {
+    /* center the page content and keep horizontal gutters responsive */
+    max-width: 76.8125rem;
+    margin: 0 auto;
     padding: 9.38rem 8.84rem 10rem 8.84rem;
     text-align: center;
 }
@@ -153,7 +157,7 @@ ul {
     margin: 3.12rem;
 }
 
-li::before {
+.card li::before {
     content: '•';
     color: #2CB1BC;
     padding-right: 1rem;
@@ -163,3 +167,325 @@ li::before {
     font-size: 1.5rem;
     font-weight: 700;
 }
+
+.section-mini-cards {
+    display: flex;
+    gap: 5.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.mini-card {
+    flex: 1 1 36.8125rem;
+    max-width: 36.8125rem;
+    min-height: 17.5rem;
+    border-radius: 1.875rem;
+    border: 1px solid #8A38F5;
+    background: rgba(15, 23, 42, 0.50);
+    box-shadow: 0 0 10px 0 #8A38F5;
+    margin: 3.75rem auto;
+}
+
+.mini-card:hover {
+    border: 1px solid #8A38F5;
+    box-shadow: 0 10px 50px 10px rgba(0, 0, 0, 0.26);
+    transition: all 0.3s ease-out;
+    transform: translateY(-5px);
+}
+
+.mini-card li::before {
+    content: '•';
+    color: #2CB1BC;
+    padding-right: 1rem;
+}
+
+.last-card {
+    width: min(76.8125rem, calc(100% - 6.24rem));
+    min-height: 17.5rem;
+    border-radius: 1.875rem;
+    border: 1px solid #8A38F5;
+    background: rgba(15, 23, 42, 0.50);
+    box-shadow: 0 0 10px 0 #8A38F5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 3.75rem auto;
+}
+
+.last-card ul {
+    text-align: center;
+}
+
+.last-card:hover {
+    border: 1px solid #8A38F5;
+    box-shadow: 0 10px 50px 10px rgba(0, 0, 0, 0.26);
+    transition: all 0.3s ease-out;
+    transform: translateY(-5px);
+}
+
+.last {
+    margin-bottom: 5rem;
+}
+
+.final-slogan {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.last-h3 {
+    margin-bottom: 4rem;
+}
+
+footer {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    font-family: 'Segoe UI', 'Poppins', sans-serif;
+    font-size: 1.125rem;
+}
+
+.lyra {
+    font-family: 'poppins', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 800;
+    margin-top: 0.5rem;
+    color: #2CB1BC;
+}
+
+/* Background blurs container and individual blobs
+   - Positioned with vw/vh so they scale with viewport
+   - Use fixed container so blobs remain visually anchored
+   - Only these classes are modified as requested */
+.blur {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.blur > div {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.9;
+    transform: translateZ(0);
+    will-change: transform, opacity;
+}
+
+/* Cyan / teal blobs */
+.blur-1 {
+    width: 36vw;
+    height: 32vw;
+    left: 4vw;
+    top: -8vh;
+    background: radial-gradient(circle at 30% 30%, rgba(153,247,255,0.95), rgba(44,177,188,0.18) 50%, transparent 70%);
+}
+
+.blur-2 {
+    width: 34vw;
+    height: 30vw;
+    left: 50vw;
+    top: -12vh;
+    background: radial-gradient(circle at 60% 40%, rgba(153,247,255,0.75), rgba(44,177,188,0.12) 50%, transparent 72%);
+}
+
+.blur-3 {
+    width: 28vw;
+    height: 24vw;
+    right: 6vw;
+    top: 6vh;
+    background: radial-gradient(circle at 40% 40%, rgba(44,177,188,0.55), transparent 60%);
+}
+
+/* Purple / magenta blobs */
+.blur-4 {
+    width: 40vw;
+    height: 36vw;
+    right: -6vw;
+    top: 8vh;
+    background: radial-gradient(circle at 60% 40%, rgba(138,56,245,0.9), rgba(60,21,127,0.12) 50%, transparent 75%);
+    filter: blur(100px);
+}
+
+.blur-5 {
+    width: 22vw;
+    height: 20vw;
+    left: 10vw;
+    top: 40vh;
+    background: radial-gradient(circle at 40% 50%, rgba(138,56,245,0.35), transparent 70%);
+}
+
+.blur-6 {
+    width: 18vw;
+    height: 16vw;
+    left: 5vw;
+    bottom: 8vh;
+    background: radial-gradient(circle at 30% 60%, rgba(99,247,255,0.18), rgba(44,177,188,0.06) 50%, transparent 80%);
+}
+
+.blur-7 {
+    width: 24vw;
+    height: 18vw;
+    right: 18vw;
+    bottom: 6vh;
+    background: radial-gradient(circle at 60% 60%, rgba(138,56,245,0.2), rgba(60,21,127,0.05) 50%, transparent 80%);
+}
+
+.blur-8 {
+    width: 12vw;
+    height: 12vw;
+    left: 38vw;
+    top: 30vh;
+    background: radial-gradient(circle at 50% 50%, rgba(99,247,255,0.25), transparent 70%);
+}
+
+.blur-9 {
+    width: 14vw;
+    height: 14vw;
+    right: 34vw;
+    top: 18vh;
+    background: radial-gradient(circle at 50% 50%, rgba(138,56,245,0.28), transparent 70%);
+}
+
+.blur-10 {
+    width: 10vw;
+    height: 10vw;
+    left: 70vw;
+    top: 50vh;
+    background: radial-gradient(circle at 50% 50%, rgba(99,247,255,0.18), transparent 70%);
+}
+
+.blur-11 {
+    width: 16vw;
+    height: 14vw;
+    left: 78vw;
+    bottom: 18vh;
+    background: radial-gradient(circle at 40% 60%, rgba(138,56,245,0.14), transparent 70%);
+}
+
+.blur-12 {
+    width: 20vw;
+    height: 18vw;
+    right: 4vw;
+    bottom: 22vh;
+    background: radial-gradient(circle at 50% 50%, rgba(44,177,188,0.12), rgba(153,247,255,0.04) 40%, transparent 75%);
+}
+
+/* Responsive refinements */
+@media (max-width: 1200px) {
+    .blur > div { filter: blur(70px); }
+    .blur-1 { width: 44vw; height: 38vw; left: 2vw; top: -14vh; }
+    .blur-4 { width: 48vw; height: 42vw; right: -14vw; top: 6vh; }
+}
+
+@media (max-width: 768px) {
+    .blur { z-index: -2; }
+    .blur > div { filter: blur(50px); opacity: 0.8; }
+    .blur-1 { width: 70vw; height: 60vw; left: -10vw; top: -22vh; }
+    .blur-2 { left: 30vw; top: -26vh; width: 60vw; height: 50vw; }
+    .blur-4 { right: -22vw; top: -6vh; width: 64vw; height: 58vw; filter: blur(60px); }
+    /* hide smaller accents on very small screens to reduce clutter */
+    .blur-8, .blur-9, .blur-10, .blur-11 { display: none; }
+
+    /* Container margin/padding */
+    .container {
+        padding: 1.875rem;
+        text-align: center;
+    }
+
+    /* Logo */
+    .logo {
+        width: 13.9375rem;
+        height: 4.4954rem;
+        display: block;
+        margin: 0 auto 5.45rem auto;
+        object-fit: contain;
+    }
+
+    /* Global text size handled via root font-size (fluid rem). Avoid overriding body font-size here. */
+
+    /* First slogan spacing */
+    .slogan {
+        font-size: 0.875rem;
+        margin-bottom: 2.5rem;
+    }
+
+    /* Buttons stacked, same padding, smaller radius */
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        align-items: center;
+        margin-bottom: 0;
+    }
+
+    .buttons a, .buttons button {
+        width: 100%;
+    }
+
+    .inscription, .connexion {
+        padding: 0.625rem 2.6875rem;
+        border-radius: 1rem;
+        font-size: 0.875rem;
+    }
+
+    .buttons button:last-child {
+        margin-bottom: 6.25rem;
+    }
+
+    /* Headings and descriptions */
+    h3 {
+        font-size: 1rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .description {
+        font-size: 0.875rem;
+        margin-bottom: 9.38rem;
+    }
+
+    /* Cards */
+    .card, .mini-card, .last-card {
+        border-radius: 1.875rem;
+        margin-bottom: 1.25rem;
+    }
+
+    /* ULs inside cards */
+    .card ul, .mini-card ul, .last-card ul {
+        margin: 1.88rem;
+        font-size: 0.875rem;
+    }
+
+    /* Sections spacing */
+    .section-cards {
+        margin-bottom: 5rem;
+    }
+
+    .section-mini-cards {
+        gap: 1.25rem;
+    }
+
+    /* Last group spacing */
+    .last {
+        margin-bottom: 3.13rem;
+    }
+
+    .last-h3 {
+        margin-bottom: 1.88rem;
+    }
+
+    /* Footer text sizes */
+    footer p:first-child {
+        font-size: 0.75rem;
+    }
+
+    .lyra {
+        font-size: 0.75rem;
+        margin-bottom: 1.25rem;
+    }
+
+    /* ensure blur intensity reduced on small mobile */
+    .blur > div { filter: blur(40px); }
+}
+
