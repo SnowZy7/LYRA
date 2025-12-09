@@ -1,0 +1,165 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    
+}
+
+body {
+    background-color: #0F172A;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    padding: 9.38rem 8.84rem 10rem 8.84rem;
+    text-align: center;
+}
+
+.logo {
+    width: 24.3125rem;
+    display: block;
+    margin: 0 auto 5rem auto;
+}
+
+.slogan {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 3.5rem;
+}
+
+/* Buttons */
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 9.37rem;
+    gap: 1.25rem;
+}
+
+.inscription {
+    width: 25.875rem;
+    height: 4.0625rem;
+    padding: 0.625rem 2.6875rem;
+    background-color: transparent;
+    border-radius: 1.625rem;
+    border: 1.63px solid #8A38F5;
+    box-shadow: 0 6.55px 6.55px 0 rgba(0, 0, 0, 0.25);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4375rem;
+    font-weight: 700;
+    transition: all 0.3s ease-out;
+}
+
+.inscription:hover {
+    background-color: #3C157F;
+    border: 1.63px solid #3C157F;
+    box-shadow: 0 6.55px 6.55px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+}
+
+.inscription:active {
+    background-color: #3C157F;
+    border: none;
+    box-shadow: 0 0 7.69px 6.55px rgba(0, 0, 0, 0.50) inset;
+    transition: all 0.3s ease-out;
+    font-size: 1.375rem;
+}
+
+.connexion {
+    width: 25.875rem;
+    height: 4.0625rem;
+    padding: 0.625rem 2.6875rem;
+    background-color: #8A38F5;
+    border-radius: 1.625rem;
+    border: 1.63px solid #8A38F5;
+    box-shadow: 0 6.55px 6.55px 0 rgba(0, 0, 0, 0.25);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4375rem;
+    font-weight: 700;
+    transition: all 0.3s ease-out;
+}
+
+.connexion:hover {
+    background-color: #3C157F;
+    border: 1.63px solid #3C157F;
+    box-shadow: 0 6.55px 6.55px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+}
+
+.connexion:active {
+    background-color: #3C157F;
+    border: none;
+    box-shadow: 0 0 7.69px 6.55px rgba(0, 0, 0, 0.50) inset;
+    transition: all 0.3s ease-out;
+    font-size: 1.375rem;
+}
+
+h3 {
+    background: conic-gradient(from 90deg at 50% 50%, #99F7FF 0deg, #2CB1BC 360deg);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.description {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.section-intro {
+    margin-bottom: 12.5rem;
+}
+
+.section-cards {
+    margin-bottom: 10rem;
+}
+
+.card {
+    width: min(76.8125rem, calc(100% - 6.24rem));
+    min-height: 17.5rem;
+    border-radius: 1.875rem;
+    border: 1px solid #8A38F5;
+    background: rgba(15, 23, 42, 0.50);
+    box-shadow: 0 0 10px 0 #8A38F5;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 3.75rem auto;
+}
+
+.card:hover {
+    border: 1px solid #8A38F5;
+    box-shadow: 0 10px 50px 10px rgba(0, 0, 0, 0.26);
+    transition: all 0.3s ease-out;
+    transform: translateY(-5px);
+}
+
+ul {
+    font-size: 1.5rem;
+    font-weight: 400;
+    text-align: left;
+    list-style: none;
+    margin: 3.12rem;
+}
+
+li::before {
+    content: '•';
+    color: #2CB1BC;
+    padding-right: 1rem;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
