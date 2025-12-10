@@ -170,20 +170,21 @@ ul {
 
 .section-mini-cards {
     display: flex;
-    gap: 5.75rem;
+    gap: 2rem;
     justify-content: center;
+    align-items: stretch;
     flex-wrap: wrap;
 }
 
 .mini-card {
-    flex: 1 1 36.8125rem;
-    max-width: 36.8125rem;
+    flex: 1 1 calc(50% - 1.5rem);
+    max-width: calc(50% - 1.5rem);
     min-height: 17.5rem;
     border-radius: 1.875rem;
     border: 1px solid #8A38F5;
     background: rgba(15, 23, 42, 0.50);
     box-shadow: 0 0 10px 0 #8A38F5;
-    margin: 3.75rem auto;
+    margin: 2rem 0;
 }
 
 .mini-card:hover {
@@ -369,7 +370,12 @@ footer {
     height: 18vw;
     right: 4vw;
     bottom: 22vh;
-    background: radial-gradient(circle at 50% 50%, rgba(44,177,188,0.12), rgba(153,247,255,0.04) 40%, transparent 75%);
+    background: radial-gradient(circle at 50% 50%, rgba(60,21,127,0.9), rgba(60,21,127,0.12) 55%, transparent 78%);
+}
+
+/* Couleur unique pour tous les blurs */
+.blur > div {
+    background: radial-gradient(circle at 50% 50%, rgba(60,21,127,0.9), rgba(60,21,127,0.12) 55%, transparent 78%) !important;
 }
 
 /* Responsive refinements */
@@ -464,6 +470,12 @@ footer {
 
     .section-mini-cards {
         gap: 1.25rem;
+    }
+
+    .mini-card {
+        flex-basis: 100%;
+        max-width: 100%;
+        margin: 1.5rem 0;
     }
 
     /* Last group spacing */
