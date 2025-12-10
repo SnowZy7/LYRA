@@ -40,6 +40,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     margin-bottom: 9.37rem;
     gap: 1.25rem;
 }
@@ -174,12 +175,13 @@ ul {
     justify-content: center;
     align-items: stretch;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .mini-card {
-    flex: 1 1 calc(50% - 1.5rem);
-    max-width: calc(50% - 1.5rem);
-    min-height: 17.5rem;
+    width: 25rem;
+    height: 25rem;
+    flex-shrink: 0;
     border-radius: 1.875rem;
     border: 1px solid #8A38F5;
     background: rgba(15, 23, 42, 0.50);
@@ -198,6 +200,10 @@ ul {
     content: '•';
     color: #2CB1BC;
     padding-right: 1rem;
+}
+
+.mini-card ul {
+    padding-bottom: 2rem;
 }
 
 .last-card {
@@ -408,10 +414,9 @@ footer {
     /* Buttons stacked, same padding, smaller radius */
     .buttons {
         display: flex;
-        flex-direction: column;
         gap: 1.25rem;
         align-items: center;
-        margin-bottom: 0;
+        flex-wrap: wrap;
     }
 
     .buttons a, .buttons button {
@@ -419,13 +424,9 @@ footer {
     }
 
     .inscription, .connexion {
-        padding: 0.625rem 2.6875rem;
+        padding: 0.625rem 0.6875rem;
         border-radius: 1rem;
         font-size: 0.875rem;
-    }
-
-    .buttons button:last-child {
-        margin-bottom: 6.25rem;
     }
 
     /* Headings and descriptions */
