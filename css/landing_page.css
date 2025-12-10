@@ -280,7 +280,6 @@ footer {
     height: 32vw;
     left: 4vw;
     top: -8vh;
-    background: radial-gradient(circle at 30% 30%, rgba(153,247,255,0.95), rgba(44,177,188,0.18) 50%, transparent 70%);
 }
 
 .blur-2 {
@@ -288,7 +287,6 @@ footer {
     height: 30vw;
     left: 50vw;
     top: -12vh;
-    background: radial-gradient(circle at 60% 40%, rgba(153,247,255,0.75), rgba(44,177,188,0.12) 50%, transparent 72%);
 }
 
 .blur-3 {
@@ -296,7 +294,6 @@ footer {
     height: 24vw;
     right: 6vw;
     top: 6vh;
-    background: radial-gradient(circle at 40% 40%, rgba(44,177,188,0.55), transparent 60%);
 }
 
 /* Purple / magenta blobs */
@@ -305,7 +302,6 @@ footer {
     height: 36vw;
     right: -6vw;
     top: 8vh;
-    background: radial-gradient(circle at 60% 40%, rgba(138,56,245,0.9), rgba(60,21,127,0.12) 50%, transparent 75%);
     filter: blur(100px);
 }
 
@@ -314,7 +310,6 @@ footer {
     height: 20vw;
     left: 10vw;
     top: 40vh;
-    background: radial-gradient(circle at 40% 50%, rgba(138,56,245,0.35), transparent 70%);
 }
 
 .blur-6 {
@@ -322,7 +317,6 @@ footer {
     height: 16vw;
     left: 5vw;
     bottom: 8vh;
-    background: radial-gradient(circle at 30% 60%, rgba(99,247,255,0.18), rgba(44,177,188,0.06) 50%, transparent 80%);
 }
 
 .blur-7 {
@@ -330,7 +324,6 @@ footer {
     height: 18vw;
     right: 18vw;
     bottom: 6vh;
-    background: radial-gradient(circle at 60% 60%, rgba(138,56,245,0.2), rgba(60,21,127,0.05) 50%, transparent 80%);
 }
 
 .blur-8 {
@@ -338,7 +331,6 @@ footer {
     height: 12vw;
     left: 38vw;
     top: 30vh;
-    background: radial-gradient(circle at 50% 50%, rgba(99,247,255,0.25), transparent 70%);
 }
 
 .blur-9 {
@@ -346,7 +338,6 @@ footer {
     height: 14vw;
     right: 34vw;
     top: 18vh;
-    background: radial-gradient(circle at 50% 50%, rgba(138,56,245,0.28), transparent 70%);
 }
 
 .blur-10 {
@@ -354,7 +345,6 @@ footer {
     height: 10vw;
     left: 70vw;
     top: 50vh;
-    background: radial-gradient(circle at 50% 50%, rgba(99,247,255,0.18), transparent 70%);
 }
 
 .blur-11 {
@@ -362,7 +352,6 @@ footer {
     height: 14vw;
     left: 78vw;
     bottom: 18vh;
-    background: radial-gradient(circle at 40% 60%, rgba(138,56,245,0.14), transparent 70%);
 }
 
 .blur-12 {
@@ -370,7 +359,6 @@ footer {
     height: 18vw;
     right: 4vw;
     bottom: 22vh;
-    background: radial-gradient(circle at 50% 50%, rgba(60,21,127,0.9), rgba(60,21,127,0.12) 55%, transparent 78%);
 }
 
 /* Couleur unique pour tous les blurs */
