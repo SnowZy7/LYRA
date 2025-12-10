@@ -45,6 +45,14 @@ body {
     gap: 1.25rem;
 }
 
+.buttons a,
+.buttons button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
 .inscription {
     width: 25.875rem;
     height: 4.0625rem;
@@ -414,19 +422,21 @@ footer {
     /* Buttons stacked, same padding, smaller radius */
     .buttons {
         display: flex;
-        gap: 1.25rem;
         align-items: center;
         flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
     }
 
     .buttons a, .buttons button {
-        width: 100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .inscription, .connexion {
-        padding: 0.625rem 0.6875rem;
-        border-radius: 1rem;
-        font-size: 0.875rem;
+        border-radius: 0.875rem;
+        font-size: 0.8125rem;
     }
 
     /* Headings and descriptions */
