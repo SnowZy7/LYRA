@@ -7,7 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/landing_page.css">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/landing_page.css">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/footer.css">
 </head>
 <body>
     <!-- Background flou lumineux -->
@@ -28,10 +29,10 @@
 
     <!-- Contenu de la page -->
     <div class="container">
-        <img class="logo" src="../assets/svg/Logo_Lyra.svg" alt="logo">
+        <img class="logo" src="<?php echo get_template_directory_uri(); ?>/assets/svg/Logo_Lyra.svg" alt="logo">
 
         <div>
-            <p class="slogan">Ici, tu ne crées jamais seul : partage tes questions, découvre des solutions et fais évoluer ta musique avec l’aide d’une communauté passionnée.</p>
+            <p class="slogan">Ici, tu ne crées jamais seul : partage tes questions, découvre des solutions et fais évoluer ta musique avec l'aide d'une communauté passionnée.</p>
             <div class="buttons">
                 <a href="#"><button class="inscription">Inscription</button></a>
                 <a href="#"><button class="connexion">Connexion</button></a>
@@ -39,7 +40,7 @@
         </div>
         
         <section class="section-intro">
-            <h3><em>LYRA</em> est une plateforme d’entraide dédiée aux musiciens.</h3>
+            <h3><em>LYRA</em> est une plateforme d'entraide dédiée aux musiciens.</h3>
             <br>
             <br>
             <p class="description">Chaque utilisateur peut poser une question, demander un avis, partager une difficulté ou montrer son travail… et recevoir des réponses de personnes qui partagent la même passion.</p>
@@ -50,17 +51,17 @@
             <div class="card">
                 <ul>
                     <li> Pose ta question en quelques secondes</li>
-                    <li> Ajoute des tags pour qu’elle touche les bonnes personnes</li>
+                    <li> Ajoute des tags pour qu'elle touche les bonnes personnes</li>
                     <li> Reçois des retours constructifs de musiciens débutants à confirmés</li>
-                    <li> Identifie la réponse qui t’a aidé avec le tag « Solution »</li>
+                    <li> Identifie la réponse qui t'a aidé avec le tag « Solution »</li>
                     <li> Ton post devient alors « Résolu » et aide les autres à leur tour</li>
                 </ul>
             </div>
-            <p class="description">Sur LYRA, chacun apporte sa pierre à l’édifice</p>
+            <p class="description">Sur LYRA, chacun apporte sa pierre à l'édifice</p>
         </section>
 
         <section class="section-cards">
-            <h3>Nous valorisons l’entraide</h3>
+            <h3>Nous valorisons l'entraide</h3>
             <div class="card">
                 <ul>
                     <h4 class="card-title">Système de badges & progression</h4>
@@ -71,7 +72,7 @@
                     <li> Gagne en visibilité sur la plateforme</li>
                 </ul>
             </div>
-            <p class="description">Sur LYRA, chacun apporte sa pierre à l’édifice</p>
+            <p class="description">Sur LYRA, chacun apporte sa pierre à l'édifice</p>
         </section>
 
         <section class="section-cards">
@@ -99,13 +100,13 @@
         </section>
 
         <section class="section-cards">
-            <h3>Un fil d’actualité personnalisé</h3>
+            <h3>Un fil d'actualité personnalisé</h3>
             <div class="card">
                 <ul>
-                    <h4 class="card-title">Grâçe aux tags ajoutés lors de l’inscription</h4>
+                    <h4 class="card-title">Grâçe aux tags ajoutés lors de l'inscription</h4>
                     <br>
-                    <li> Ton feed s’adapte à ce que TOI, tu veux apprendre</li>
-                    <li> Tes publications sont montrées aux personnes les plus susceptibles d’y répondre</li>
+                    <li> Ton feed s'adapte à ce que TOI, tu veux apprendre</li>
+                    <li> Tes publications sont montrées aux personnes les plus susceptibles d'y répondre</li>
                     <li> Tu restes dans un environnement visuel clair et cohérant</li>
                 </ul>
             </div>
@@ -116,9 +117,9 @@
             <h3>Pourquoi rejoindre <em>LYRA</em> ?</h3>
             <div class="last-card">
                 <ul>
-                    <li>Parce que progresser seul, c’est difficile</li>
-                    <li>Parce qu’un regard extérieur peut tout changer</li>
-                    <li>Parce que tu mérites un espace où l’on t’écoute, t’aide et te conseille</li>
+                    <li>Parce que progresser seul, c'est difficile</li>
+                    <li>Parce qu'un regard extérieur peut tout changer</li>
+                    <li>Parce que tu mérites un espace où l'on t'écoute, t'aide et te conseille</li>
                 </ul>
             </div>
         </section>
@@ -133,10 +134,6 @@
         </div>
     </div>
 
-    <!-- Footer (à changer aver le fichier footer.php) -->
-    <footer>
-        <p>Conditions générales</p>
-        <p class="lyra"><em>LYRA</em></p>
-    </footer>
-</body>
-</html>
+    <!-- Footer avec fonction WordPress -->
+    <?php get_footer(); ?>
+

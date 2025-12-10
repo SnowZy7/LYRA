@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lyra - Profil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/profil.css">
+</head>
+<body>
+    <!-- Background flou lumineux -->
+    <div class="blur">
+        <div class="blur-1"></div>
+        <div class="blur-2"></div>
+        <div class="blur-3"></div>
+        <div class="blur-4"></div>
+        <div class="blur-5"></div>
+        <div class="blur-6"></div>
+        <div class="blur-7"></div>
+        <div class="blur-8"></div>
+    </div>
+
+    <!-- Header à intégrer avec le fichier php-->
+    
+    <!-- Contenu principal -->
+    <div class="profile-content">
+        <!-- Bannière -->
+        <div class="profile-banner">
+            <img src="../Assets/img/Bannières.png" alt="Bannière de profil" class="banner-img">
+        </div>
+
+        <!-- Section profil -->
+        <div class="profile-section">
+            <!-- Photo de profil -->
+            <div class="profile-avatar">
+                <img src="../Assets/img/pikachu.jpg" alt="Avatar" class="avatar-img">
+            </div>
+
+            <!-- Informations profil -->
+            <div class="profile-info">
+                <!-- Ligne avec pseudo, badges et "..." -->
+                <div class="profile-top-row">
+                    <h1 class="profile-name">Pikachu</h1>
+                    <div class="profile-badges">
+                        <button class="badge-btn">Musicien confirmé</button>
+                        <button class="badge-btn">Goût de l'aide</button>
+                    </div>
+                    <button class="profile-menu-btn" aria-label="Options du profil">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </button>
+                </div>
+                <!-- Niveau en dessous -->
+                <p class="profile-level">Niv. 7</p>
+            </div>
+        </div>
+
+        <!-- Menu de navigation -->
+        <nav class="profile-nav">
+            <div class="nav-line"></div>
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-tab="statistiques">Statistiques</button>
+                <button class="nav-tab" data-tab="posts">Mes posts</button>
+                <button class="nav-tab" data-tab="enregistres">Enregistrés</button>
+                <button class="nav-tab" data-tab="activites">Activités</button>
+            </div>
+        </nav>
+
+        <!-- Contenu des onglets -->
+        <div class="tab-content-container">
+            <!-- Onglet Statistiques -->
+            <div class="tab-content active" id="statistiques">
+                <!-- 1. Niveau & Progression -->
+                <section class="stats-section">
+                    <h2 class="section-subtitle">Niveau & progression</h2>
+                    <div class="section-content">
+                        <p class="level-title">"Musicien confirmé"</p>
+                        <div class="level-info">
+                            <span class="current-level">Niv. 7</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                            <span class="next-level">Niv. 8</span>
+                        </div>
+                        <p class="xp-info">720xp - 360xp avant niveau 8</p>
+                    </div>
+                </section>
+
+                <!-- 2. Succès (badges) -->
+                <section class="stats-section">
+                    <h2 class="section-subtitle">
+                        <span class="subtitle-bold">Succès</span> <span class="subtitle-normal">(badges)</span>
+                    </h2>
+                    <div class="section-content">
+                        <div class="badges-grid">
+                            <div class="badge-card unlocked">
+                                <h3 class="badge-title">Nouveau</h3>
+                                <p class="badge-description">Niveau 1 - Être un nouvel utilisateur sur Lyra</p>
+                            </div>
+                            <div class="badge-card unlocked">
+                                <h3 class="badge-title">Musicien confirmé</h3>
+                                <p class="badge-description">Atteindre le niveau 5</p>
+                            </div>
+                            <div class="badge-card unlocked">
+                                <h3 class="badge-title">Helpeur novice</h3>
+                                <p class="badge-description">Aider la communauté en envoyant 10 commentaires "Suggestion"</p>
+                                <p class="badge-xp">+ 50xp</p>
+                            </div>
+                            <div class="badge-card unlocked">
+                                <h3 class="badge-title">Goût de l'aide</h3>
+                                <p class="badge-description">Avoir 5 commentaires épinglé en tant que "Solution"</p>
+                                <p class="badge-xp">+ 150xp</p>
+                            </div>
+                            <div class="badge-card unlocked">
+                                <h3 class="badge-title">Merci !</h3>
+                                <p class="badge-description">Avoir un commentaire épinglé en tant que "Solution"</p>
+                                <p class="badge-xp">+ 100xp</p>
+                            </div>
+                            <div class="badge-card locked">
+                                <h3 class="badge-title">A l'aide</h3>
+                                <p class="badge-description">Envoyez son premier post</p>
+                                <p class="badge-xp">+ 20xp</p>
+                            </div>
+                            <!-- Badges supplémentaires (cachés par défaut) -->
+                            <div class="badge-card locked hidden-badges">
+                                <h3 class="badge-title">Maître de la guitare</h3>
+                                <p class="badge-description">Répondre à 50 questions sur la guitare</p>
+                                <p class="badge-xp">+ 200xp</p>
+                            </div>
+                            <div class="badge-card locked hidden-badges">
+                                <h3 class="badge-title">Producteur expert</h3>
+                                <p class="badge-description">Partager 20 compositions originales</p>
+                                <p class="badge-xp">+ 300xp</p>
+                            </div>
+                            <div class="badge-card locked hidden-badges">
+                                <h3 class="badge-title">Mentor bienveillant</h3>
+                                <p class="badge-description">Aider 100 utilisateurs avec des solutions</p>
+                                <p class="badge-xp">+ 500xp</p>
+                            </div>
+                            <div class="badge-card locked hidden-badges">
+                                <h3 class="badge-title">Virtuose du piano</h3>
+                                <p class="badge-description">Atteindre le niveau 10 et partager des tutoriels</p>
+                                <p class="badge-xp">+ 400xp</p>
+                            </div>
+                            <div class="badge-card locked hidden-badges">
+                                <h3 class="badge-title">Légende de Lyra</h3>
+                                <p class="badge-description">Être reconnu par la communauté comme expert</p>
+                                <p class="badge-xp">+ 1000xp</p>
+                            </div>
+                        </div>
+                        <button class="see-more-btn" id="seeMoreBtn">Voir plus</button>
+                    </div>
+                </section>
+
+                <!-- 3. Centres d'intérêts -->
+                <section class="stats-section">
+                    <h2 class="section-subtitle">Centres d'intérêts</h2>
+                    <div class="section-content">
+                        <div class="interests-container">
+                            <div class="interest-card">
+                                <div class="interest-icon">🎸</div>
+                                <p class="interest-text">Guitare</p>
+                            </div>
+                            <div class="interest-card">
+                                <div class="interest-icon">🎵</div>
+                                <p class="interest-text">Blues</p>
+                            </div>
+                            <button class="add-interest-btn">+</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer (à changer avec le fichier footer.php) -->
+    <footer>
+        <p>Conditions générales</p>
+        <p class="lyra"><em>LYRA</em></p>
+    </footer>
+
+    <script src="../js/profil.js"></script>
+</body>
+</html>
