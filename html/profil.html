@@ -173,6 +173,116 @@
                     </div>
                 </section>
             </div>
+
+            <div class="tab-content" id="posts">
+                <section class="posts-section">
+                    <div class="posts-header">
+                        <h2 class="section-subtitle posts-title">Mes posts</h2>
+                        <button class="new-post-btn" id="newPostBtn">Nouveau post</button>
+                    </div>
+                    <div class="posts-empty">
+                        <p class="posts-empty-text">Un problème ? Une question ? Ou besoin d'un avis extérieur ? Crée ton premier post dès maintenant !</p>
+                    </div>
+                </section>
+            </div>
+
+            <div class="tab-content" id="activites">
+                <section class="activities-section">
+                    <h2 class="section-subtitle">Activités</h2>
+                    <div class="activities-list">
+                        <div class="activity-card">
+                            <h3 class="activity-title">Tu as reçu un nouveau succès !</h3>
+                            <p class="activity-subtitle">Goût de l'aide</p>
+                            <p class="activity-description">Avoir 5 commentaires épinglés en tant que "Solution"</p>
+                            <p class="activity-xp">+ 150xp</p>
+                        </div>
+                        <div class="activity-card">
+                            <h3 class="activity-title">SOLUTIONS !</h3>
+                            <p class="activity-description">TLEAFY_GREEN_8 t'a épinglé en tant que "Solution"</p>
+                            <p class="activity-xp">+ 50xp</p>
+                        </div>
+                        <div class="activity-card">
+                            <h3 class="activity-title">Level Up !</h3>
+                            <p class="activity-description">Tu viens d'atteindre le niveau 7</p>
+                        </div>
+                        <div class="activity-card">
+                            <h3 class="activity-title">SOLUTIONS !</h3>
+                            <p class="activity-description">DRACOFEU t'a épinglé en tant que "Solution"</p>
+                            <p class="activity-xp">+ 50xp</p>
+                        </div>
+                        <div class="activity-card hidden-activity">
+                            <h3 class="activity-title">Level Up !</h3>
+                            <p class="activity-description">Tu viens d'atteindre le niveau 6</p>
+                        </div>
+                        <div class="activity-card hidden-activity">
+                            <h3 class="activity-title">Level Up !</h3>
+                            <p class="activity-description">Tu viens d'atteindre le niveau 5</p>
+                        </div>
+                        <div class="activity-card hidden-activity">
+                            <h3 class="activity-title">Tu as reçu un nouveau succès !</h3>
+                            <p class="activity-subtitle">Merci !</p>
+                            <p class="activity-description">Avoir un commentaire épinglé en tant que "Solution"</p>
+                            <p class="activity-xp">+ 100xp</p>
+                        </div>
+                        <div class="activity-card hidden-activity">
+                            <h3 class="activity-title">SOLUTIONS !</h3>
+                            <p class="activity-description">UNiNE t'a épinglé en tant que "Solution"</p>
+                            <p class="activity-xp">+ 50xp</p>
+                        </div>
+                        <button class="see-more-btn activities-see-more-btn" id="activitiesSeeMoreBtn">Voir plus</button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay options profil -->
+    <div class="profile-overlay" id="profileOverlay" aria-hidden="true">
+        <div class="profile-overlay-dialog" role="dialog" aria-modal="true">
+            <button class="overlay-close" aria-label="Fermer le menu">×</button>
+            <h3 class="overlay-title">Options du profil</h3>
+            <div class="overlay-actions">
+                <button class="overlay-action-btn">Modifier le profil</button>
+                <button class="overlay-action-btn accent">Déconnexion</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay nouveau post -->
+    <div class="new-post-overlay" id="newPostOverlay" aria-hidden="true">
+        <div class="new-post-dialog" role="dialog" aria-modal="true">
+            <button class="overlay-close new-post-close" aria-label="Fermer la création de post">×</button>
+            <h3 class="overlay-title new-post-title">Nouveau post</h3>
+            <form class="new-post-form">
+                <div class="form-group">
+                    <div class="label-row">
+                        <label class="form-label">Tags<span class="required">*</span></label>
+                        <button type="button" class="tag-add-btn" aria-label="Ajouter un tag">+</button>
+                    </div>
+                    <p class="form-hint">(au moins un)</p>
+                    <input type="text" class="tag-input" placeholder="Ajoute un tag et appuie sur Entrée" aria-label="Saisir un tag">
+                    <div class="tags-area" aria-live="polite">Ajoute un tag pour commencer</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Description<span class="required">*</span></label>
+                    <p class="form-hint">600 caractères max.</p>
+                    <textarea class="form-textarea" placeholder="Entre une description..." rows="5" maxlength="600"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Médias</label>
+                    <div class="media-drop" id="mediaDrop">
+                        <input type="file" id="mediaInput" class="media-input" accept="image/*,video/*,audio/*" aria-label="Ajouter un média">
+                        <p class="media-drop-text">Dépose ou charge un média <span class="media-icon">↓</span></p>
+                        <p class="media-drop-hint">Un seul média (image, vidéo ou son)</p>
+                    </div>
+                    <ul class="media-list" id="mediaList" aria-live="polite"></ul>
+                </div>
+
+                <p class="form-hint submit-hint" id="newPostStatus"></p>
+                <button type="submit" class="overlay-action-btn accent new-post-submit">Nouveau post</button>
+            </form>
         </div>
     </div>
 
