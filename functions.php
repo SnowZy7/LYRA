@@ -71,6 +71,77 @@ function lyra_enqueue_assets() {
 }
 
 add_action('wp_enqueue_scripts', 'lyra_enqueue_assets');
+
+/**
+ * AJAX inscription front.
+ */
+function lyra_ajax_register_user() {
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'lyra_register')) {
+        wp_send_json_error(['message' => 'Nonce invalide'], 400);
+    }
+
+    $email    = isset($_POST['user_email']) ? sanitize_email(wp_unslash($_POST['user_email'])) : '';
+    $password = isset($_POST['user_pass']) ? (string) $_POST['user_pass'] : '';
+    $first    = isset($_POST['user_first']) ? sanitize_text_field(wp_unslash($_POST['user_first'])) : '';
+    $last     = isset($_POST['user_last']) ? sanitize_text_field(wp_unslash($_POST['user_last'])) : '';
+    $username = isset($_POST['user_login']) ? sanitize_user(wp_unslash($_POST['user_login']), true) : '';
+    $interests = isset($_POST['interests']) ? array_map('intval', (array) $_POST['interests']) : [];
+
+    if (!$email || !$password || !$first || !$last || !$username) {
+        wp_send_json_error(['message' => 'Champs requis manquants.'], 400);
+    }
+    if (!is_email($email)) {
+        wp_send_json_error(['message' => 'Email invalide.'], 400);
+    }
+    if (username_exists($username)) {
+        wp_send_json_error(['message' => 'Nom d’utilisateur déjà pris.'], 400);
+    }
+    if (email_exists($email)) {
+        wp_send_json_error(['message' => 'Email déjà utilisé.'], 400);
+    }
+    if (strlen($password) < 8) {
+        wp_send_json_error(['message' => 'Mot de passe trop court (8+).'], 400);
+    }
+
+    $user_id = wp_insert_user([
+        'user_login' => $username,
+        'user_pass'  => $password,
+        'user_email' => $email,
+        'first_name' => $first,
+        'last_name'  => $last,
+        'display_name' => trim($first . ' ' . $last),
+        'role'       => 'subscriber',
+    ]);
+
+    if (is_wp_error($user_id)) {
+        wp_send_json_error(['message' => 'Erreur création utilisateur.'], 400);
+    }
+
+    if (!empty($interests)) {
+        update_user_meta($user_id, 'lyra_interests', $interests);
+    }
+
+    wp_send_json_success(['message' => 'Inscription réussie', 'user_id' => $user_id]);
+}
+add_action('wp_ajax_nopriv_lyra_register_user', 'lyra_ajax_register_user');
+add_action('wp_ajax_lyra_register_user', 'lyra_ajax_register_user');
+
+// Masquer la barre admin pour tous les utilisateurs
+add_filter('show_admin_bar', '__return_false');
+
+// Ajouter les intérêts dans le tableau des utilisateurs
+add_filter('manage_users_columns', function($c){ $c['lyra_interests']='Intérêts'; return $c; });
+add_filter('manage_users_custom_column', function($val,$col,$user_id){
+  if ($col==='lyra_interests'){
+    $ids = (array) get_user_meta($user_id,'lyra_interests',true);
+    if (!$ids) return '—';
+    $names = array_map(function($id){ $t=get_term($id); return $t && !is_wp_error($t) ? $t->name : null; }, $ids);
+    $names = array_filter($names);
+    return $names ? implode(', ', $names) : '—';
+  }
+  return $val;
+},10,3);
+
 function handle_user_registration()
 {
     if (isset($_POST['register_submit']) && isset($_POST['register_nonce']) && wp_verify_nonce($_POST['register_nonce'], 'register_action')) {

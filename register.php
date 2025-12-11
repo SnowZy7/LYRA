@@ -12,7 +12,34 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class('page-template-template-register'); ?>>
-<?php $theme_uri = get_template_directory_uri(); ?>
+<?php
+$theme_uri = get_template_directory_uri();
+
+if (!function_exists('lyra_get_terms_by_parent_slug')) {
+    function lyra_get_terms_by_parent_slug($slug, $taxonomy = 'category')
+    {
+        $parent = get_term_by('slug', $slug, $taxonomy);
+        if (!$parent) {
+            return [];
+        }
+        return get_terms([
+            'taxonomy'   => $taxonomy,
+            'hide_empty' => false,
+            'parent'     => $parent->term_id,
+            'orderby'    => 'name',
+            'order'      => 'ASC',
+        ]);
+    }
+}
+
+// Récupération des termes pour l'étape 5 (intérêts)
+$register_instruments = taxonomy_exists('instrument')
+    ? get_terms(['taxonomy' => 'instrument', 'hide_empty' => false, 'orderby' => 'name', 'order' => 'ASC'])
+    : lyra_get_terms_by_parent_slug('instruments');
+
+$register_genres = lyra_get_terms_by_parent_slug('genres');
+$register_logiciels = lyra_get_terms_by_parent_slug('logiciels');
+?>
 <div class="register-page">
     <div class="register-progress">
         <button type="button" class="register-back" aria-label="Revenir à l'étape précédente">
@@ -88,15 +115,75 @@
                 </form>
             </div>
 
+            <div class="register-step step-5">
+                <h1>Quels sont vos centres d’intérêts ?</h1>
+                <form class="register-form interests-form" novalidate>
+                    <div class="interests-groups">
+                        <?php
+                        $groups = [
+                            'instruments' => $register_instruments,
+                            'genres'      => $register_genres,
+                            'logiciels'   => $register_logiciels,
+                        ];
+                        foreach ($groups as $group_key => $terms) :
+                            $label = ucfirst($group_key);
+                            $is_instruments = ($group_key === 'instruments');
+                            if ($is_instruments && taxonomy_exists('instrument')) {
+                                $label = 'Instruments';
+                            } elseif ($group_key === 'genres') {
+                                $label = 'Genres';
+                            } elseif ($group_key === 'logiciels') {
+                                $label = 'Logiciels';
+                            }
+                            ?>
+                            <div class="interests-group">
+                                <div class="interests-header">
+                                    <h2><?php echo esc_html($label); ?></h2>
+                                    <?php if (!empty($terms) && count($terms) > 3) : ?>
+                                        <button type="button" class="toggle-group" data-toggle-group="<?php echo esc_attr($group_key); ?>">Voir plus...</button>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="interests-list" data-group="<?php echo esc_attr($group_key); ?>">
+                                    <?php
+                                    if (!empty($terms)) :
+                                        $count = 0;
+                                        foreach ($terms as $term) :
+                                            $is_extra = $count >= 3;
+                                            ?>
+                                            <label class="interest-chip <?php echo $is_extra ? 'is-extra' : ''; ?>">
+                                                <input type="checkbox" name="interests[]" value="<?php echo esc_attr($term->term_id); ?>" <?php echo $is_extra ? 'data-extra="true"' : ''; ?>>
+                                                <span><?php echo esc_html($term->name); ?></span>
+                                            </label>
+                                            <?php
+                                            $count++;
+                                        endforeach;
+                                    else :
+                                        ?>
+                                        <p class="interests-empty">Aucune catégorie trouvée pour ce groupe.</p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="form-error" id="reg-interests-error"></div>
+                    <?php
+                        $lyra_register_nonce = wp_create_nonce('lyra_register');
+                        $home_redirect = home_url('/');
+                    ?>
+                    <button
+                        type="button"
+                        class="submit-btn"
+                        id="reg-submit-interests"
+                        data-ajax-url="<?php echo esc_url(admin_url('admin-ajax.php')); ?>"
+                        data-nonce="<?php echo esc_attr($lyra_register_nonce); ?>"
+                        data-redirect="<?php echo esc_url($home_redirect); ?>"
+                    >Continuer →</button>
+                </form>
+            </div>
+
             <p class="login-link">Déjà un compte ? <a href="<?php echo esc_url(home_url('/login')); ?>">Se connecter</a></p>
         </div>
     </div>
-
-    <div class="register-footer">
-        <a href="#" class="footer-link">Conditions générales</a>
-        <a href="<?php echo esc_url(home_url('/')); ?>" class="footer-brand">LYRA</a>
-    </div>
-</div>
 
 <?php wp_footer(); ?>
 </body>

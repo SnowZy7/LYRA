@@ -8,6 +8,17 @@
     color: #ffffff;
 }
 
+body.page-template-template-register {
+    overflow: hidden;
+}
+
+body.page-template-template-register.allow-scroll {
+    overflow: auto;
+}
+
+body.page-template-template-register.allow-scroll .register-page {
+    overflow: auto;
+}
 .register-progress {
     position: fixed;
     top: 2.5rem;
@@ -22,6 +33,20 @@
     margin: 0;
     z-index: 2000;
     pointer-events: none;
+    padding: 0.75rem 1.5rem 1rem;
+    isolation: isolate;
+}
+
+.register-progress::before {
+    content: "";
+    position: absolute;
+    top: -2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 7rem;
+    background: #0F172A;
+    z-index: -1;
 }
 
 .register-back {
@@ -207,6 +232,109 @@
     text-align: left;
 }
 
+.interests-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+.interests-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.interests-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.interests-header h2 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.toggle-group {
+    border: none;
+    background: transparent;
+    color: #a78bfa;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 12px;
+    transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.toggle-group:hover {
+    color: #c4b5fd;
+    transform: translateY(-1px);
+}
+
+.interests-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.interest-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1.05rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.14);
+    color: #0f172a;
+    font-weight: 600;
+    font-size: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.interest-chip input {
+    display: none;
+}
+
+.interest-chip span {
+    color: #e7e7ff;
+    letter-spacing: 0.2px;
+}
+
+.interest-chip:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 25px rgba(138, 56, 245, 0.25);
+    background: rgba(138, 56, 245, 0.14);
+    border-color: rgba(138, 56, 245, 0.3);
+}
+
+.interest-chip input:checked + span,
+.interest-chip.selected span {
+    color: #0f172a;
+}
+
+.interest-chip.selected {
+    background: linear-gradient(135deg, #a855f7 0%, #7c3aed 60%, #6d28d9 100%);
+    color: #0f172a;
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 14px 30px rgba(108, 32, 247, 0.35);
+}
+
+.interest-chip.is-extra {
+    display: none;
+}
+
+.interests-list.expanded .interest-chip.is-extra {
+    display: inline-flex;
+}
+
+.interests-empty {
+    color: #c9c9d3;
+    font-size: 14px;
+}
+
 .login-link {
     text-align: center;
     margin-top: 0.6rem;
@@ -221,30 +349,6 @@
 }
 
 .login-link a:hover {
-    text-decoration: underline;
-}
-
-.register-footer {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.4rem;
-    margin-top: auto;
-    padding-top: 2.5rem;
-    font-size: 13px;
-}
-
-.register-footer .footer-link,
-.register-footer .footer-brand {
-    color: #00d4ff;
-    text-decoration: none;
-    font-weight: 700;
-    letter-spacing: 0.4px;
-}
-
-.register-footer .footer-link:hover,
-.register-footer .footer-brand:hover {
     text-decoration: underline;
 }
 

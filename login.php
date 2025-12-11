@@ -17,12 +17,8 @@
         <h1>Connexion</h1>
 
         <?php
-        if (isset($_GET['login']) && $_GET['login'] == 'failed') {
-            echo '<div class="error-message">Email ou mot de passe incorrect.</div>';
-        }
-        if (isset($_GET['login']) && $_GET['login'] == 'empty') {
-            echo '<div class="error-message">Remplissez tous les champs svp.</div>';
-        }
+        $login_error_failed = isset($_GET['login']) && $_GET['login'] === 'failed';
+        $login_error_empty  = isset($_GET['login']) && $_GET['login'] === 'empty';
         ?>
 
             <form method="post" action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>" class="login-form" novalidate>
@@ -36,6 +32,12 @@
                 <div class="form-group">
                     <label class="sr-only" for="user_pass">Mot de passe</label>
                     <input type="password" name="pwd" id="user_pass" placeholder="Entrez votre mot de passe">
+                    <?php if ($login_error_empty): ?>
+                        <div class="error-message">Remplissez tous les champs svp.</div>
+                    <?php endif; ?>
+                    <?php if ($login_error_failed): ?>
+                        <div class="error-message">Email ou mot de passe incorrect.</div>
+                    <?php endif; ?>
                 </div>
 
                 <div class="form-group">

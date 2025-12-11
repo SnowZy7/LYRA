@@ -103,11 +103,8 @@
 }
 
 .error-message {
-    background: rgba(255, 72, 72, 0.12);
-    border: 1px solid rgba(255, 72, 72, 0.35);
-    color: #ffd1d1;
-    padding: 10px 14px;
-    border-radius: 10px;
-    margin-bottom: 1rem;
-    font-size: 14px;
+    min-height: 18px;
+    color: #ffb6b6;
+    font-size: 13px;
+    text-align: left;
 }
