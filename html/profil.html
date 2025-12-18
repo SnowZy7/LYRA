@@ -159,16 +159,32 @@
                 <section class="stats-section">
                     <h2 class="section-subtitle">Centres d'intérêts</h2>
                     <div class="section-content">
-                        <div class="interests-container">
-                            <div class="interest-card">
-                                <div class="interest-icon">🎸</div>
+                        <div class="interests-container" id="interestsContainer">
+                            <div class="interest-card" data-interest="guitare">
+                                <div class="interest-icon">
+                                    <img class="interest-icon-img" src="../assets/svg/svg_categories/Guitare%20vector.svg" alt="Icône guitare">
+                                </div>
                                 <p class="interest-text">Guitare</p>
+                                <button class="interest-remove" aria-label="Supprimer Guitare">×</button>
                             </div>
-                            <div class="interest-card">
-                                <div class="interest-icon">🎵</div>
+                            <div class="interest-card" data-interest="blues">
+                                <div class="interest-icon">
+                                    <img class="interest-icon-img" src="../assets/svg/svg_categories/Blues%20vector.svg" alt="Icône blues">
+                                </div>
                                 <p class="interest-text">Blues</p>
+                                <button class="interest-remove" aria-label="Supprimer Blues">×</button>
                             </div>
-                            <button class="add-interest-btn">+</button>
+                            <button class="add-interest-btn" id="addInterestBtn" aria-label="Ajouter un centre d'intérêt">+</button>
+                        </div>
+                        <div class="interest-add-panel" id="interestAddPanel" hidden>
+                            <label class="interest-add-label" for="interestSelect">Ajouter un centre d'intérêt</label>
+                            <div class="interest-add-row">
+                                <select id="interestSelect" class="interest-select" aria-label="Choisir un centre d'intérêt">
+                                    <option value="" disabled selected>Choisis une catégorie</option>
+                                </select>
+                                <button type="button" id="confirmAddInterest" class="interest-add-confirm">Ajouter</button>
+                            </div>
+                            <p class="interest-add-hint">Il faut au moins 1 centre d'intérêt.</p>
                         </div>
                     </div>
                 </section>

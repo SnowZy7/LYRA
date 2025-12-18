@@ -116,7 +116,7 @@ body {
 }
 
 h3 {
-    background: conic-gradient(from 90deg at 50% 50%, #99F7FF 0deg, #2CB1BC 360deg);
+    background: #2CB1BC;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
