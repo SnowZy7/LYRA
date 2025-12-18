@@ -11,13 +11,31 @@ $theme_uri = get_template_directory_uri();
 <main class="home-wrapper">
     <div class="home-post-stack">
         <?php
-        $feed_query = new WP_Query([
+        $current_user_id = get_current_user_id();
+        $user_interests  = $current_user_id ? (array) get_user_meta($current_user_id, 'lyra_interests', true) : [];
+        $user_interests  = array_filter(array_map('intval', $user_interests));
+
+        $query_args = [
             'post_type'      => 'post',
             'posts_per_page' => 10,
             'post_status'    => 'publish',
-        ]);
+        ];
 
-        if ($feed_query->have_posts()) :
+        if (!empty($user_interests)) {
+            $query_args['tax_query'] = [
+                [
+                    'taxonomy' => 'category',
+                    'field'    => 'term_id',
+                    'terms'    => $user_interests,
+                    'operator' => 'IN',
+                ],
+            ];
+        }
+
+        $skip_query = $current_user_id && empty($user_interests);
+        $feed_query = $skip_query ? null : new WP_Query($query_args);
+
+        if (!$skip_query && $feed_query && $feed_query->have_posts()) :
             while ($feed_query->have_posts()) :
                 $feed_query->the_post();
 
@@ -27,19 +45,7 @@ $theme_uri = get_template_directory_uri();
                 $display_name = get_the_author();
 
                 $categories  = get_the_category();
-                $tags_terms  = get_the_tags();
-
-                $badges = [];
-                if (!empty($categories)) {
-                    $badges = array_slice($categories, 0, 2);
-                }
-
-                $tags = [];
-                if (!empty($tags_terms)) {
-                    $tags = $tags_terms;
-                } elseif (!empty($categories)) {
-                    $tags = array_slice($categories, 2);
-                }
+                $tags = !empty($categories) ? $categories : [];
 
                 $video_url = get_post_meta(get_the_ID(), 'lyra_video_url', true);
                 $audio_url = get_post_meta(get_the_ID(), 'lyra_audio_url', true);
@@ -63,11 +69,8 @@ $theme_uri = get_template_directory_uri();
                                 <div class="home-post-headings">
                                     <div class="home-post-username-line">
                                         <span class="home-post-username"><?php echo esc_html($display_name); ?></span>
-                                        <?php if (!empty($badges)) : ?>
-                                            <?php foreach ($badges as $badge) : ?>
-                                                <span class="home-post-badge"><?php echo esc_html($badge->name); ?></span>
-                                            <?php endforeach; ?>
-                                        <?php endif; ?>
+                                        <span class="home-post-badge">Badge</span>
+                                        <span class="home-post-badge">Badge</span>
                                     </div>
                                     <?php if (!empty($tags)) : ?>
                                         <div class="home-post-tags">
@@ -119,7 +122,7 @@ $theme_uri = get_template_directory_uri();
                 </section>
             <?php endwhile; wp_reset_postdata(); ?>
         <?php else : ?>
-            <p>Aucun post pour le moment.</p>
+            <p style="color: #ffffff;">Aucun post pour le moment.</p>
         <?php endif; ?>
     </div>
 </main>

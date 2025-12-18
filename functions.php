@@ -16,57 +16,61 @@ function lyra_enqueue_assets() {
     // CSS global (header + base)
     wp_enqueue_style(
         'lyra-header-style',
-        get_template_directory_uri() . '/assets/css/header.css',
+        get_template_directory_uri() . '/css/header.css',
         [],
         $version ?: null
     );
 
     wp_enqueue_style(
         'lyra-main',
-        get_template_directory_uri() . '/assets/css/main.css',
+        get_template_directory_uri() . '/css/main.css',
         [],
         $version ?: null
     );
 
     // CSS par page / template
     if (is_front_page() || is_home() || is_page_template('home.php')) {
-        wp_enqueue_style('lyra-home', get_template_directory_uri() . '/assets/css/home.css', ['lyra-main'], $version ?: null);
+        wp_enqueue_style('lyra-home', get_template_directory_uri() . '/css/home.css', ['lyra-main'], $version ?: null);
     }
 
     if (is_page('categories') || is_page_template('categories.php') || is_page_template('categories-template.php')) {
-        wp_enqueue_style('lyra-categories', get_template_directory_uri() . '/assets/css/categories.css', ['lyra-main'], $version ?: null);
+        wp_enqueue_style('lyra-categories', get_template_directory_uri() . '/css/categories.css', ['lyra-main'], $version ?: null);
     }
 
     if (is_page('decouvrir') || is_page_template('decouvrir.php') || is_page_template('decouvrir-template.php')) {
-        wp_enqueue_style('lyra-decouvrir', get_template_directory_uri() . '/assets/css/decouvrir.css', ['lyra-main'], $version ?: null);
+        wp_enqueue_style('lyra-decouvrir', get_template_directory_uri() . '/css/decouvrir.css', ['lyra-main'], $version ?: null);
     }
 
     if (is_page('profil') || is_page_template('profil.php') || is_page_template('profil-template.php')) {
-        wp_enqueue_style('lyra-profil', get_template_directory_uri() . '/assets/css/profil.css', ['lyra-main'], $version ?: null);
+        wp_enqueue_style('lyra-profil', get_template_directory_uri() . '/css/profil.css', ['lyra-main'], $version ?: null);
     }
 
     if (is_page('parametres') || is_page_template('parametres.php') || is_page_template('parametres-template.php')) {
-        wp_enqueue_style('lyra-parametres', get_template_directory_uri() . '/assets/css/parametres.css', ['lyra-main'], $version ?: null);
+        wp_enqueue_style('lyra-parametres', get_template_directory_uri() . '/css/parametres.css', ['lyra-main'], $version ?: null);
     }
 
     if (is_page('login') || is_page_template('login.php') || is_page_template('login-template.php')) {
-        wp_enqueue_style('lyra-login', get_template_directory_uri() . '/assets/css/login.css', ['lyra-main'], $version ?: null);
+        wp_enqueue_style('lyra-login', get_template_directory_uri() . '/css/login.css', ['lyra-main'], $version ?: null);
     }
 
     if (is_page('register') || is_page_template('register.php') || is_page_template('register-template.php')) {
-        wp_enqueue_style('lyra-register', get_template_directory_uri() . '/assets/css/register.css', ['lyra-main'], $version ?: null);
+        wp_enqueue_style('lyra-register', get_template_directory_uri() . '/css/register.css', ['lyra-main'], $version ?: null);
     }
 
     if (is_page('register') || is_page_template('register.php') || is_page_template('register-template.php')) {
-        wp_enqueue_script('lyra-register', get_template_directory_uri() . '/assets/js/register.js', [], $version ?: null, true);
+        wp_enqueue_script('lyra-register', get_template_directory_uri() . '/js/register.js', [], $version ?: null, false);
+    }
+
+    if (is_page('profil') || is_page_template('profil.php') || is_page_template('profil-template.php')) {
+        wp_enqueue_script('lyra-profil', get_template_directory_uri() . '/js/profil.js', [], $version ?: null, false);
     }
 
     wp_enqueue_script(
         'lyra-header-script',
-        get_template_directory_uri() . '/assets/js/header.js',
+        get_template_directory_uri() . '/js/header.js',
         [],
         $version ?: null,
-        true
+        false
     );
 }
 
@@ -125,6 +129,73 @@ function lyra_ajax_register_user() {
 }
 add_action('wp_ajax_nopriv_lyra_register_user', 'lyra_ajax_register_user');
 add_action('wp_ajax_lyra_register_user', 'lyra_ajax_register_user');
+
+/**
+ * AJAX création de post depuis le profil.
+ */
+function lyra_ajax_create_post() {
+    if (!is_user_logged_in()) {
+        wp_send_json_error(['message' => 'Connexion requise.'], 401);
+    }
+
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'lyra_new_post')) {
+        wp_send_json_error(['message' => 'Nonce invalide.'], 400);
+    }
+
+    $user_id = get_current_user_id();
+    $content = isset($_POST['description']) ? wp_strip_all_tags(wp_unslash($_POST['description'])) : '';
+    $cat_ids = isset($_POST['categories']) ? array_map('intval', (array) $_POST['categories']) : [];
+
+    if (!$content) {
+        wp_send_json_error(['message' => 'Description requise.'], 400);
+    }
+    // Limite 600 caractères côté serveur également
+    if (mb_strlen($content) > 600) {
+        $content = mb_substr($content, 0, 600);
+    }
+    if (empty($cat_ids)) {
+        wp_send_json_error(['message' => 'Choisis au moins une catégorie.'], 400);
+    }
+
+    $post_id = wp_insert_post([
+        'post_title'   => wp_trim_words($content, 8, ''),
+        'post_content' => $content,
+        'post_status'  => 'publish',
+        'post_type'    => 'post',
+        'post_author'  => $user_id,
+    ], true);
+
+    if (is_wp_error($post_id)) {
+        wp_send_json_error(['message' => 'Erreur lors de la création du post.'], 400);
+    }
+
+    wp_set_post_terms($post_id, $cat_ids, 'category', false);
+
+    // Gestion d'un seul média optionnel
+    if (!empty($_FILES['media']) && !empty($_FILES['media']['name'])) {
+        require_once ABSPATH . 'wp-admin/includes/file.php';
+        require_once ABSPATH . 'wp-admin/includes/media.php';
+        require_once ABSPATH . 'wp-admin/includes/image.php';
+
+        $attachment_id = media_handle_upload('media', $post_id);
+        if (!is_wp_error($attachment_id)) {
+            $mime = get_post_mime_type($attachment_id);
+            $url  = wp_get_attachment_url($attachment_id);
+
+            if (strpos($mime, 'image/') === 0) {
+                set_post_thumbnail($post_id, $attachment_id);
+            } elseif (strpos($mime, 'video/') === 0) {
+                update_post_meta($post_id, 'lyra_video_url', esc_url_raw($url));
+            } elseif (strpos($mime, 'audio/') === 0) {
+                update_post_meta($post_id, 'lyra_audio_url', esc_url_raw($url));
+            }
+        }
+    }
+
+    wp_send_json_success(['message' => 'Post créé', 'post_id' => $post_id]);
+}
+add_action('wp_ajax_lyra_create_post', 'lyra_ajax_create_post');
+add_action('wp_ajax_nopriv_lyra_create_post', 'lyra_ajax_create_post');
 
 // Masquer la barre admin pour tous les utilisateurs
 add_filter('show_admin_bar', '__return_false');

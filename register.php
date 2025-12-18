@@ -185,7 +185,6 @@ $register_logiciels = lyra_get_terms_by_parent_slug('logiciels');
         </div>
     </div>
 
-<?php wp_footer(); ?>
 </body>
 </html>
 
